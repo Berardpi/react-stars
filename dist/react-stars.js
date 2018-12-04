@@ -89,7 +89,7 @@ var ReactStars = function (_Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(props) {
       this.setState({
-        stars: this.getStars(props.value),
+        stars: this.getStars(props.value, props.count),
         value: props.value,
         halfStar: {
           at: Math.floor(props.value),
@@ -124,12 +124,14 @@ var ReactStars = function (_Component) {
     }
   }, {
     key: 'getStars',
-    value: function getStars(activeCount) {
+    value: function getStars(activeCount, count) {
+      count = count || this.state.config.count;
+
       if (typeof activeCount === 'undefined') {
         activeCount = this.getRate();
       }
       var stars = [];
-      for (var i = 0; i < this.state.config.count; i++) {
+      for (var i = 0; i < count; i++) {
         stars.push({
           active: i <= activeCount - 1
         });
